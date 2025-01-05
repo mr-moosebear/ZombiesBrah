@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://0l5a0m6dpxbh"]
+[gd_scene load_steps=3 format=3 uid="uid://0l5a0m6dpxbh"]
 
 [ext_resource type="FontFile" uid="uid://4dryopf57ihr" path="res://Art/Fonts/ZeroCool.otf" id="1_a0d3r"]
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_vki3k"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vki3k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -47,3 +49,5 @@ offset_bottom = 423.0
 theme_override_fonts/font = ExtResource("1_a0d3r")
 theme_override_font_sizes/font_size = 64
 text = "Options"
+
+[connection signal="pressed" from="PlayGameButton" to="." method="_on_play_game_button_pressed"]

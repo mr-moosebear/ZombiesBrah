@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://esadpd63eigj"]
+
+[ext_resource type="Script" path="res://UI/crosshairs_node.gd" id="1_2pt2m"]
+[ext_resource type="Texture2D" uid="uid://bla825wrutjbg" path="res://Art/Crosshairs/1.png" id="1_r1rvi"]
+[ext_resource type="AudioStream" uid="uid://c5tlt6k45iht2" path="res://Art/SoundFX/514228__superphat__sniper-rifle.wav" id="3_46e3c"]
+[ext_resource type="AudioStream" uid="uid://dqfvh4tyia2xw" path="res://Art/SoundFX/RifleReload.mp3" id="4_bll2e"]
+
+[node name="CrosshairsNode" type="Node2D"]
+script = ExtResource("1_2pt2m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1165.0
+offset_bottom = 665.0
+color = Color(0.303046, 0.52649, 0.16547, 1)
+
+[node name="Crosshairs" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_r1rvi")
+
+[node name="SniperShotSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_46e3c")
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bll2e")
+volume_db = 8.988
+
+[node name="ReloadDelay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ReloadDelay" to="." method="_on_reload_delay_timeout"]

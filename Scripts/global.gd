@@ -1,5 +1,9 @@
 extends Node
 
+func remove_children_froom_root_node():
+	var node_children = get_children()
+	for node in node_children:
+		node.call_deferred("queue_free")
 
 
 #NOTE; Dictionary will not be saved in order

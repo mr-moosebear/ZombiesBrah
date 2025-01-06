@@ -26,4 +26,4 @@ func foo() -> void:
 
 
 func _on_level_button_1_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://Levels/Area_1/area_1_level_1.tscn")

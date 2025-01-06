@@ -9,3 +9,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position.x += -25 * delta
 	move_and_collide(Vector2(0, 1))
+
+
+func _on_headshot_area_body_entered(body: Node2D) -> void:
+	print(body)

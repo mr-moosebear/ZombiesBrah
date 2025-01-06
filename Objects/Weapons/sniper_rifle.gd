@@ -1,26 +1,26 @@
 extends Node2D
 
 @onready var crosshair = $CrosshairSprite
-var shots_fired : int = 0
+@export var reload_delay : float = 2.0
 var can_shoot : bool = true
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(_delta: float) -> void:
 	crosshair.position = get_local_mouse_position()
 	if Input.is_action_just_pressed("click") && can_shoot:
 		$GunshotSound.play()
 		shoot_hole()
-		shots_fired += 1
-		print(shots_fired)
 		can_shoot = false
 		reload()
 
 func reload() -> void:
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(reload_delay).timeout
 	$ReloadSound.play()
-	await get_tree().create_timer(1.0).timeout
+	await $ReloadSound.finished
 	can_shoot = true
 
-#NOTE: Might create a class for this so if no node it creates it for me
 func shoot_hole() -> void:
 	var hole_path = preload("res://Objects/Weapons/bullet.tscn")
 	var hole = hole_path.instantiate()

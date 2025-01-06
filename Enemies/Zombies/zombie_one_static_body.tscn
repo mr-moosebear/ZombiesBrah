@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvl0cx0ry35i6"]
+[gd_scene load_steps=6 format=3 uid="uid://dvl0cx0ry35i6"]
 
 [ext_resource type="Script" path="res://Enemies/Zombies/zombie_one_static_body.gd" id="1_pb342"]
 [ext_resource type="SpriteFrames" uid="uid://cof00orfs1jxd" path="res://Enemies/Zombies/zombie_one.tres" id="1_svr65"]
+[ext_resource type="Script" path="res://Scripts/Components/zombie_walk_component.gd" id="3_wwgp8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ttx1r"]
-radius = 48.0
-height = 202.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryyhj"]
+size = Vector2(74, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e0d1x"]
 radius = 51.0392
@@ -17,17 +17,22 @@ script = ExtResource("1_pb342")
 sprite_frames = ExtResource("1_svr65")
 animation = &"walk"
 frame = 14
-frame_progress = 0.951957
+frame_progress = 0.718895
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 20)
-shape = SubResource("CapsuleShape2D_ttx1r")
+position = Vector2(17, 113)
+shape = SubResource("RectangleShape2D_ryyhj")
 
-[node name="HeadshotArea" type="Area2D" parent="." groups=["headshot"]]
-collision_mask = 2
+[node name="HeadshotArea" type="Area2D" parent="." groups=["headshot", "zombie"]]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2(-8, -18)
+position = Vector2(-14, -19)
 shape = SubResource("CircleShape2D_e0d1x")
 
-[connection signal="body_entered" from="HeadshotArea" to="." method="_on_headshot_area_body_entered"]
+[node name="CompZombieWalk" type="Node" parent="." node_paths=PackedStringArray("zombie")]
+script = ExtResource("3_wwgp8")
+zombie = NodePath("..")
+
+[connection signal="area_entered" from="HeadshotArea" to="." method="_on_headshot_area_area_entered"]

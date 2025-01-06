@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://1q681w5qe6i"]
+[gd_scene load_steps=4 format=3 uid="uid://1q681w5qe6i"]
 
 [ext_resource type="Script" path="res://Objects/Weapons/bullet.gd" id="1_j2sou"]
 [ext_resource type="Texture2D" uid="uid://fbikdiw0me37" path="res://Art/Objects/gunshot_animation.png" id="2_d63ch"]
 
-[node name="Bullet" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8nwx"]
+radius = 3.0
+
+[node name="Bullet" type="Node2D" groups=["ammo"]]
 script = ExtResource("1_j2sou")
 
 [node name="BulletImage" type="Sprite2D" parent="."]
 texture = ExtResource("2_d63ch")
+
+[node name="BulletArea" type="Area2D" parent="." groups=["ammo"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletArea"]
+shape = SubResource("CircleShape2D_f8nwx")
+
+[connection signal="area_entered" from="BulletArea" to="." method="_on_bullet_area_area_entered"]

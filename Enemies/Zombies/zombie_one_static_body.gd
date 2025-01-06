@@ -1,15 +1,21 @@
 extends StaticBody2D
 
-@onready var collision = $CollisionShape2D
+
+@onready var zombie_sprite = $AnimatedSprite2D
+var shots_to_death = 5
+var sprite : Sprite2D
+var wound_pos
 
 func _ready() -> void:
-	$AnimatedSprite2D.play("walk")
+	zombie_sprite.play("walk")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	position.x += -25 * delta
-	move_and_collide(Vector2(0, 1))
-
-
-func _on_headshot_area_body_entered(body: Node2D) -> void:
-	print(body)
+func _on_headshot_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("ammo"):
+		shots_to_death -= 5
+		print("Shot hit Head, shots left are ", shots_to_death)
+		if shots_to_death <= 0:
+			$CompZombieWalk.undead = false
+			zombie_sprite.play("death")
+			await zombie_sprite.animation_finished
+			await get_tree().create_timer(3).timeout
+			self.queue_free()

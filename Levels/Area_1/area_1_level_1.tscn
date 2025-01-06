@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://d0wj7jnthsouo"]
+[gd_scene load_steps=6 format=4 uid="uid://d0wj7jnthsouo"]
 
 [ext_resource type="Texture2D" uid="uid://co2wjwulh8x5x" path="res://Art/Backgrounds/Cartoon Spooky Level Set_Background - Layer 00.png" id="1_ndrv1"]
 [ext_resource type="TileSet" uid="uid://bte5oyrejkxq" path="res://Resources/area_1_tiles.tres" id="2_cim43"]
 [ext_resource type="PackedScene" uid="uid://dvl0cx0ry35i6" path="res://Enemies/Zombies/zombie_one_static_body.tscn" id="3_yurh6"]
 [ext_resource type="PackedScene" uid="uid://dskpdeir1b3uv" path="res://Objects/Weapons/sniper_rifle.tscn" id="4_mwuup"]
+[ext_resource type="PackedScene" uid="uid://bv0r2ga18jp7j" path="res://Objects/Defenses/tower_one.tscn" id="5_70iut"]
 
 [node name="Area1Level1" type="Node2D"]
 
@@ -18,6 +19,9 @@ tile_map_data = PackedByteArray("AAAAACQAAAAAAAAAAAAAACUAAAAAAAEAAAAAACYAAAAAAAI
 tile_set = ExtResource("2_cim43")
 
 [node name="BulletHolesNode" type="Node2D" parent="."]
+
+[node name="Tower_One" parent="." instance=ExtResource("5_70iut")]
+position = Vector2(577, 458)
 
 [node name="ZombieOneStaticBody" parent="." instance=ExtResource("3_yurh6")]
 position = Vector2(1054, 456)

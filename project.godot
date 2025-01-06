@@ -28,6 +28,7 @@ window/stretch/mode="viewport"
 zombie=""
 headshot=""
 ammo=""
+defense=""
 
 [input]
 

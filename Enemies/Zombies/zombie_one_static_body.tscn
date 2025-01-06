@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvl0cx0ry35i6"]
+[gd_scene load_steps=7 format=3 uid="uid://dvl0cx0ry35i6"]
 
 [ext_resource type="Script" path="res://Enemies/Zombies/zombie_one_static_body.gd" id="1_pb342"]
 [ext_resource type="SpriteFrames" uid="uid://cof00orfs1jxd" path="res://Enemies/Zombies/zombie_one.tres" id="1_svr65"]
-[ext_resource type="Script" path="res://Scripts/Components/zombie_walk_component.gd" id="3_wwgp8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryyhj"]
-size = Vector2(74, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgv3s"]
+size = Vector2(76, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e0d1x"]
 radius = 51.0392
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_js6d5"]
+radius = 39.1152
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acamm"]
+size = Vector2(23, 161)
 
 [node name="ZombieOneStaticBody" type="StaticBody2D" groups=["zombie"]]
 script = ExtResource("1_pb342")
@@ -20,19 +25,30 @@ frame = 14
 frame_progress = 0.718895
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(17, 113)
-shape = SubResource("RectangleShape2D_ryyhj")
+position = Vector2(19, 108)
+shape = SubResource("RectangleShape2D_rgv3s")
 
 [node name="HeadshotArea" type="Area2D" parent="." groups=["headshot", "zombie"]]
+position = Vector2(-15, -24)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2(-14, -19)
 shape = SubResource("CircleShape2D_e0d1x")
+metadata/_edit_lock_ = true
 
-[node name="CompZombieWalk" type="Node" parent="." node_paths=PackedStringArray("zombie")]
-script = ExtResource("3_wwgp8")
-zombie = NodePath("..")
+[node name="BodyshotArea" type="Area2D" parent="."]
+position = Vector2(20, 60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyshotArea"]
+shape = SubResource("CircleShape2D_js6d5")
+metadata/_edit_lock_ = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-79.5, 20.5)
+shape = SubResource("RectangleShape2D_acamm")
 
 [connection signal="area_entered" from="HeadshotArea" to="." method="_on_headshot_area_area_entered"]
+[connection signal="area_entered" from="BodyshotArea" to="." method="_on_bodyshot_area_area_entered"]

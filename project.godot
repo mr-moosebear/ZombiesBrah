@@ -29,6 +29,7 @@ zombie=""
 headshot=""
 ammo=""
 defense=""
+bodyshot=""
 
 [input]
 

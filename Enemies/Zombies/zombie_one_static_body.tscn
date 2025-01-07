@@ -28,7 +28,7 @@ frame_progress = 0.718895
 position = Vector2(19, 108)
 shape = SubResource("RectangleShape2D_rgv3s")
 
-[node name="HeadshotArea" type="Area2D" parent="." groups=["headshot", "zombie"]]
+[node name="HeadshotArea" type="Area2D" parent="." groups=["headshot"]]
 position = Vector2(-15, -24)
 collision_layer = 3
 collision_mask = 3
@@ -37,7 +37,7 @@ collision_mask = 3
 shape = SubResource("CircleShape2D_e0d1x")
 metadata/_edit_lock_ = true
 
-[node name="BodyshotArea" type="Area2D" parent="."]
+[node name="BodyshotArea" type="Area2D" parent="." groups=["bodyshot"]]
 position = Vector2(20, 60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyshotArea"]
@@ -50,5 +50,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-79.5, 20.5)
 shape = SubResource("RectangleShape2D_acamm")
 
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="area_entered" from="HeadshotArea" to="." method="_on_headshot_area_area_entered"]
 [connection signal="area_entered" from="BodyshotArea" to="." method="_on_bodyshot_area_area_entered"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

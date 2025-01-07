@@ -21,9 +21,18 @@ tile_set = ExtResource("2_cim43")
 [node name="BulletHolesNode" type="Node2D" parent="."]
 
 [node name="Tower_One" parent="." instance=ExtResource("5_70iut")]
-position = Vector2(577, 458)
+position = Vector2(111, 454)
 
 [node name="ZombieOneStaticBody" parent="." instance=ExtResource("3_yurh6")]
-position = Vector2(1054, 456)
+position = Vector2(848, 460)
+
+[node name="ZombieOneStaticBody2" parent="." instance=ExtResource("3_yurh6")]
+position = Vector2(1075, 462)
+
+[node name="ZombieOneStaticBody3" parent="." instance=ExtResource("3_yurh6")]
+position = Vector2(1389, 458)
+
+[node name="ZombieOneStaticBody4" parent="." instance=ExtResource("3_yurh6")]
+position = Vector2(1251, 462)
 
 [node name="SniperRifle" parent="." instance=ExtResource("4_mwuup")]

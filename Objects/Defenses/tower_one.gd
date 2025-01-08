@@ -13,7 +13,7 @@ func update_health(hit: int) -> void:
 	if health <= 0:
 		queue_free()
 
-
+#TODO: Fix this
 func connect_zombie_signals() -> void:
 	group_nodes = get_tree().get_nodes_in_group("zombie")
 	scene = group_nodes[0]

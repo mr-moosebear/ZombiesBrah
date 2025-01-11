@@ -21,7 +21,7 @@ tile_set = ExtResource("2_cim43")
 [node name="BulletHolesNode" type="Node2D" parent="."]
 
 [node name="Tower_One" parent="." instance=ExtResource("5_70iut")]
-position = Vector2(111, 454)
+position = Vector2(539, 448)
 
 [node name="ZombieOneStaticBody" parent="." instance=ExtResource("3_yurh6")]
 position = Vector2(848, 460)

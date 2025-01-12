@@ -1,60 +1,56 @@
 extends StaticBody2D
-
-@onready var zombie_sprite = $AnimatedSprite2D
+# NOTE:UGLY
 @export var speed : float = 25
 @export var shots_to_death : int = 5
 @export var hit_power : int = 50
-var undead : bool = true
-var attacking : bool = false
-var moving_left : bool = true
 
-signal attacked(int)
+@onready var comp = $CompZombieMove
+signal attacked(hit: int)
 
 func _ready() -> void:
-	zombie_sprite.play("walk")
-	set_walking_direction()
+	$AnimatedSprite2D.play("walk")
 
-func _physics_process(delta: float) -> void:
-	if undead && !attacking:
-		if moving_left:
-			position.x -= speed * delta
-		else:
-			position.x += speed * delta
-		move_and_collide(Vector2(0, 1))
+func disconnect_colliders() -> void:
+	var nodes = get_children()
+	for node in nodes:
+		if node != $AnimatedSprite2D:
+			node.queue_free()
 
 func die_zombie_die() -> void:
 	if shots_to_death <= 0:
-			SignalBus.zombie_died.emit("Zombie died")
-			undead = false
-			zombie_sprite.play("death")
-			await zombie_sprite.animation_finished
+			disconnect_colliders()
+			comp.undead = false
+			$AnimatedSprite2D.play("death")
+			flicker_death()
+			await $AnimatedSprite2D.animation_finished
 			await get_tree().create_timer(3).timeout
 			self.queue_free()
 
-func set_walking_direction() -> void:
-	var screen = get_tree().root.get_viewport().size
-	var middle_point = screen.x / 2
-	if position.x < middle_point:
-		$AnimatedSprite2D.flip_h = true
-		moving_left = false
+# NOTE: Needs Work
+func flicker_death() -> void:
+	var timer : float = 1.0
+	await get_tree().create_timer(1.5).timeout
+	for i in range(20):
+		$AnimatedSprite2D.visible = !$AnimatedSprite2D.visible
+		await get_tree().create_timer(timer).timeout
+		timer -= 0.05
+		print(timer)
 
 func _on_headshot_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("ammo"):
 		shots_to_death -= 3
-		print("Shot hit Head, shots left are ", shots_to_death)
 		die_zombie_die()
 
 func _on_bodyshot_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("ammo"):
 		shots_to_death -= 1
-		print("Shot hit body, shots left are ", shots_to_death)
 		die_zombie_die()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("defense"):
-		attacking = true
-		zombie_sprite.play("attack")
+		comp.attacking = true
+		$AnimatedSprite2D.play("attack")
 
 func _on_animated_sprite_2d_animation_looped() -> void:
-	if zombie_sprite.animation == "attack":
+	if $AnimatedSprite2D.animation == "attack":
 		attacked.emit(hit_power)

@@ -9,15 +9,15 @@ func _ready() -> void:
 
 func update_health(hit: int) -> void:
 	health -= hit
-	print("Health is ", health)
 	if health <= 0:
+		print("Tower Gone")
 		queue_free()
 
 func connect_zombie_signals() -> void:
 	group_nodes = get_tree().get_nodes_in_group("zombie")
 	for i in group_nodes.size():
 		scene = group_nodes[i]
-		print(group_nodes[i])
+		print("Connecting signal to ", group_nodes[i])
 		scene.connect("attacked", _on_enemy_attacked)
 
 func _on_enemy_attacked(hit_power: int) -> void:

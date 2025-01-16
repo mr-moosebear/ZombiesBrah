@@ -35,4 +35,7 @@ position = Vector2(1389, 458)
 [node name="ZombieOneStaticBody4" parent="." instance=ExtResource("3_yurh6")]
 position = Vector2(1251, 462)
 
+[node name="ZombieOneStaticBody5" parent="." instance=ExtResource("3_yurh6")]
+position = Vector2(1079, 133)
+
 [node name="SniperRifle" parent="." instance=ExtResource("4_mwuup")]

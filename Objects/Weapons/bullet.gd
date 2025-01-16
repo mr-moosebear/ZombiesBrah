@@ -6,5 +6,5 @@ func _on_bullet_area_area_entered(area: Area2D) -> void:
 		#get_tree().current_scene.find_child(area.get_parent().name).add_child(self.duplicate())
 		self.queue_free()
 	else:
-		$BulletArea.queue_free()
+		$BulletArea.queue_free() #Turns collider off
 	

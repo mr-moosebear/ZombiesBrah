@@ -7,7 +7,6 @@ var can_shoot : bool = true
 signal update_sniper_ui
 signal reload_finished
 
-
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

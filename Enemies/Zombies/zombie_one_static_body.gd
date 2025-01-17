@@ -1,13 +1,13 @@
 extends StaticBody2D
 # NOTE:UGLY
 @export var speed : float = 25
-@export var health : int = 10
+@export var health : float = 10.0
 @export var hit_power : int = 50
 @export var head_shot_power : int = 4
 @export var body_shot_power : int = 3
 @onready var comp = $CompZombieMove
 
-var shots_to_death : int = 10
+var shots_to_death : float = 10
 signal attacked(hit: int)
 signal was_shot
 
